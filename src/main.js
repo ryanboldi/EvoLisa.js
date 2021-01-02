@@ -28,31 +28,21 @@ function setup() {
     monaPixels = monaInfo.pixels;
     //console.log(monaPixels);
 
-    initEvolution();
+    for (let i = 0; i < popSize; i++) {
+        images.push(new genome());
+    }
+
 }
 
 function draw() {
     background(255);
     image(mona, imageWidth + imageGap, 0);
     bestImage.drawToCanv();
+
+    images = EvaluateAndMakeNewPop();
 }
 
-
-function initEvolution() {
-    for (let i = 0; i < popSize; i++) {
-        images.push(new genome());
-    }
-
-    startEvaluation();
-}
-
-function startEvaluation() {
-
-
-    endEvaluation();
-}
-
-function endEvaluation() {
+function EvaluateAndMakeNewPop() {
     for (let i in images) {
         images[i].compareToGoal();
     }
@@ -67,8 +57,16 @@ function endEvaluation() {
         }
     }
 
-    //let toSelect = Math.ceil(popSize / 2);
-    rouletteWheel()
+    let toSelect = Math.ceil(popSize / 2);
+    let selected = [];
+    for (let i = 0; i < toSelect; i++) { selected.push(rouletteWheel()) };
+    for (let i = selected.length; i < popSize; i++) {
+        selected.push(random(selected));
+        selected[i].mutate();
+        selected[i].addRandomGene();
+    }
+
+    return selected
 }
 
 //selects from images based on fitness
