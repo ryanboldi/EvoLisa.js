@@ -3,20 +3,19 @@ let imageGap = 10;
 let mona;
 let monaPixels;
 
-let popSize = 25; //photos in each generation
+let popSize = 2; //photos in each generation
 let images = []; //the photos
 
-let startPolys = 10;
+let startPolys = 100;
 let bestImage;
 
 
-let mutationRate = 0.3; //chance for chromosome to mutate
-let mutationAmount = 3; // how many datapoints mutate when a chromosome mutates
-let mutationStrength = 50; //standard deviation of the gaussian for mutation
+let mutationRate = 0.4; //chance for chromosome to mutate
+let mutationAmount = 1; // how many datapoints mutate when a chromosome mutates
+let mutationStrength = 10; //standard deviation of the gaussian for mutation
 
 
 function preload() {
-    bestImage = new genome();
     mona = loadImage("https://raw.githubusercontent.com/ryanboldi/EvoLisa.js/main/mona_200.jpg");
 }
 
@@ -38,9 +37,12 @@ function setup() {
 function draw() {
     background(255);
     image(mona, imageWidth + imageGap, 0);
-    bestImage.drawToCanv();
 
+
+    console.log("finished gen");
     images = EvaluateAndMakeNewPop();
+    bestImage.img.background(255);
+    bestImage.drawToCanv();
 }
 
 function EvaluateAndMakeNewPop() {
@@ -49,7 +51,6 @@ function EvaluateAndMakeNewPop() {
     }
 
     let bestFitness = 0;
-    bestImage;
 
     for (let i in images) {
         if (images[i].fitness > bestFitness) {

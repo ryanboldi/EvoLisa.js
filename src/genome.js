@@ -14,6 +14,7 @@ class genome {
         for (let chrom in this.genes) {
             this.img = this.genes[chrom].drawToImage(this.img);
         }
+        //this.img.background(255);
         image(this.img, 0, 0);
     }
 
