@@ -75,7 +75,7 @@ function endEvaluation() {
 function rouletteWheel() {
     let total = 0;
     for (let img in images) {
-        console.log(images[img].fitness);
+        //console.log(images[img].fitness);
         total += images[img].fitness;
     }
 
@@ -84,11 +84,8 @@ function rouletteWheel() {
     for (let img in images) {
         probs[img] = (images[img].fitness / total);
     }
-
-    console.log(probs);
     let choice = random();
     for (let p in probs) {
-        console.log(choice);
         if (choice < probs[p]) {
             chosen = images[p];
             return (chosen);
