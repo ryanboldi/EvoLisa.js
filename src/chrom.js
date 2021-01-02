@@ -41,12 +41,12 @@ class chrom {
 
         //check that the mutations didn't break any values
         for (let i = 0; i < 6; i++) {
-            while (data[i] > windowHeight) data[i] = windowHeight;
-            while (data[i] < 0) data[i] = 0;
+            while (data[i] > windowHeight) data[i] = random(0, windowHeight);
+            while (data[i] < 0) data[i] = random(0, windowHeight);
         }
         for (let i = 6; i < data.length; i++) {
-            while (data[i] > 255) data[i] = 255;
-            while (data[i] < 0) data[i] = 0;
+            while (data[i] > 255) data[i] = random(0, 255);
+            while (data[i] < 0) data[i] = random(0, 255);
         }
 
         //reassign values now
