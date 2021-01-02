@@ -3,7 +3,7 @@ class genome {
         this.img = createGraphics(imageWidth, imageWidth);
         this.genes = []; //array of chromosomes.
 
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 1000; i++) {
             this.addRandomGene();
         }
 
@@ -36,5 +36,13 @@ class genome {
         }
 
         this.fitness = fitness;
+    }
+
+    mutate() {
+        for (let i in this.genes) {
+            if (random() < mutationRate) {
+                this.genes[i].mutate();
+            }
+        }
     }
 }

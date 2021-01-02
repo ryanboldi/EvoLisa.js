@@ -3,10 +3,15 @@ let imageGap = 10;
 let mona;
 let monaPixels;
 
-let popSize = 10; //photos in each generation
+let popSize = 20; //photos in each generation
 let images = []; //the photos
 
 let bestImage;
+
+
+let mutationRate = 0.1; //chance for chromosome to mutate
+let mutationAmount = 2; // how many datapoints mutate when a chromosome mutates
+let mutationStrength = 40; //standard deviation of the gaussian for mutation
 
 
 function preload() {
@@ -38,6 +43,16 @@ function initEvolution() {
         images.push(new genome());
     }
 
+    startEvaluation();
+}
+
+function startEvaluation() {
+
+
+
+}
+
+function endEvaluation() {
     for (let i in images) {
         images[i].compareToGoal();
     }
@@ -51,5 +66,31 @@ function initEvolution() {
             bestImage = images[i];
         }
     }
-    console.log(bestImage);
+
+    //let toSelect = Math.ceil(popSize / 2);
+}
+
+//selects from images based on fitness
+function rouletteWheel() {
+    let total = 0;
+    for (let img in images) {
+        total += images[img].fitness;
+    }
+
+    let probs = [];
+
+    console.log(probs);
+    for (let img in images) {
+        probs[img] = (images[img].fitness / total);
+    }
+
+    let choice = random();
+    console.log(choice);
+    for (let p in probs) {
+        if (choice < probs[p]) {
+            chosen = images[p];
+        } else {
+            choice -= probs[p];
+        }
+    }
 }
