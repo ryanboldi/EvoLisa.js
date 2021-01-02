@@ -4,21 +4,19 @@ let mona;
 
 let bestImage;
 
-
 function preload() {
+    bestImage = new genome();
     mona = new Image();
     mona.src = "Mona.jpg";
-
-    bestImage = createGraphics(imageWidth, imageWidth);
 }
 
 function setup() {
     createCanvas(800, 800);
-
+    console.log(bestImage.getPixelArray());
 }
 
 function draw() {
     background(255);
     drawingContext.drawImage(mona, imageWidth + imageGap, 0);
-    image(bestImage, 0, 0);
+    bestImage.drawToCanv();
 }
