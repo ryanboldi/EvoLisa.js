@@ -3,9 +3,11 @@ class genome {
         this.img = createGraphics(imageWidth, imageWidth);
         this.genes = []; //array of chromosomes.
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 100000; i++) {
             this.addRandomGene();
         }
+
+        this.fitness = 0;
     }
 
     drawToCanv() {
@@ -22,5 +24,10 @@ class genome {
     getPixelArray() {
         this.img.loadPixels();
         return (this.img.pixels);
+    }
+
+    compareToGoal() {
+        let testPixels = this.getPixelArray();
+        let goalPixels = mona.pixels;
     }
 }
