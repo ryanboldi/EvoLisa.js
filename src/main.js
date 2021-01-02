@@ -3,15 +3,15 @@ let imageGap = 10;
 let mona;
 let monaPixels;
 
-let popSize = 5; //photos in each generation
+let popSize = 25; //photos in each generation
 let images = []; //the photos
 
 let bestImage;
 
 
-let mutationRate = 0.1; //chance for chromosome to mutate
-let mutationAmount = 2; // how many datapoints mutate when a chromosome mutates
-let mutationStrength = 40; //standard deviation of the gaussian for mutation
+let mutationRate = 0.3; //chance for chromosome to mutate
+let mutationAmount = 3; // how many datapoints mutate when a chromosome mutates
+let mutationStrength = 50; //standard deviation of the gaussian for mutation
 
 
 function preload() {
@@ -63,7 +63,9 @@ function EvaluateAndMakeNewPop() {
     for (let i = selected.length; i < popSize; i++) {
         selected.push(random(selected));
         selected[i].mutate();
-        selected[i].addRandomGene();
+        if (random < 0.2) {
+            selected[i].addRandomGene();
+        }
     }
 
     return selected
