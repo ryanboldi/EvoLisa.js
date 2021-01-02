@@ -3,7 +3,7 @@ class genome {
         this.img = createGraphics(imageWidth, imageWidth);
         this.genes = []; //array of chromosomes.
 
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 1000; i++) {
             this.addRandomGene();
         }
 
@@ -28,6 +28,13 @@ class genome {
 
     compareToGoal() {
         let testPixels = this.getPixelArray();
-        let goalPixels = mona.pixels;
+        let goalPixels = monaPixels;
+
+        let fitness = 0;
+        for (let i in goalPixels) {
+            fitness += (255 - (Math.abs(goalPixels[i] - testPixels[i])));
+        }
+
+        console.log(fitness);
     }
 }
