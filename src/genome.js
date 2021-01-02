@@ -3,7 +3,9 @@ class genome {
         this.img = createGraphics(imageWidth, imageWidth);
         this.genes = []; //array of chromosomes.
 
-        this.addRandomGene();
+        for (let i = 0; i < startPolys; i++) {
+            this.addRandomGene();
+        }
 
         this.fitness = 0;
     }

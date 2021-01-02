@@ -1,4 +1,4 @@
-let imageWidth = 394;
+let imageWidth = 200;
 let imageGap = 10;
 let mona;
 let monaPixels;
@@ -6,6 +6,7 @@ let monaPixels;
 let popSize = 25; //photos in each generation
 let images = []; //the photos
 
+let startPolys = 10;
 let bestImage;
 
 
@@ -16,11 +17,11 @@ let mutationStrength = 50; //standard deviation of the gaussian for mutation
 
 function preload() {
     bestImage = new genome();
-    mona = loadImage("https://raw.githubusercontent.com/ryanboldi/EvoLisa.js/main/Mona.jpg");
+    mona = loadImage("https://raw.githubusercontent.com/ryanboldi/EvoLisa.js/main/mona_200.jpg");
 }
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(imageWidth * 2 + imageGap, imageWidth);
 
     mona.loadPixels();
     let monaInfo = mona.get();
@@ -63,9 +64,6 @@ function EvaluateAndMakeNewPop() {
     for (let i = selected.length; i < popSize; i++) {
         selected.push(random(selected));
         selected[i].mutate();
-        if (random < 0.2) {
-            selected[i].addRandomGene();
-        }
     }
 
     return selected
