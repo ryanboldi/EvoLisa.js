@@ -3,7 +3,7 @@ class genome {
         this.img = createGraphics(imageWidth, imageWidth);
         this.genes = []; //array of chromosomes.
 
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 1; i++) {
             this.addRandomGene();
         }
 
@@ -35,6 +35,6 @@ class genome {
             fitness += (255 - (Math.abs(goalPixels[i] - testPixels[i])));
         }
 
-        console.log(fitness);
+        this.fitness = fitness;
     }
 }
