@@ -22,12 +22,16 @@ class genome {
     }
 
     getPixelArray() {
+        for (let chrom in this.genes) {
+            this.img = this.genes[chrom].drawToImage(this.img);
+        }
         this.img.loadPixels();
         return (this.img.pixels);
     }
 
     compareToGoal() {
         let testPixels = this.getPixelArray();
+        //console.log(testPixels);
         let goalPixels = monaPixels;
 
         let fitness = 0;

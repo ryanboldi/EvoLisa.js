@@ -3,7 +3,7 @@ let imageGap = 10;
 let mona;
 let monaPixels;
 
-let popSize = 20; //photos in each generation
+let popSize = 5; //photos in each generation
 let images = []; //the photos
 
 let bestImage;
@@ -49,7 +49,7 @@ function initEvolution() {
 function startEvaluation() {
 
 
-
+    endEvaluation();
 }
 
 function endEvaluation() {
@@ -68,27 +68,31 @@ function endEvaluation() {
     }
 
     //let toSelect = Math.ceil(popSize / 2);
+    rouletteWheel()
 }
 
 //selects from images based on fitness
 function rouletteWheel() {
     let total = 0;
     for (let img in images) {
+        console.log(images[img].fitness);
         total += images[img].fitness;
     }
 
     let probs = [];
 
-    console.log(probs);
     for (let img in images) {
         probs[img] = (images[img].fitness / total);
     }
 
+    console.log(probs);
     let choice = random();
-    console.log(choice);
     for (let p in probs) {
+        console.log(choice);
         if (choice < probs[p]) {
             chosen = images[p];
+            return (chosen);
+            break;
         } else {
             choice -= probs[p];
         }
