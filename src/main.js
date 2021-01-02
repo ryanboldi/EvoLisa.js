@@ -3,7 +3,7 @@ let imageGap = 10;
 let mona;
 let monaPixels;
 
-let popSize = 2; //photos in each generation
+let popSize = 4; //photos in each generation
 let images = []; //the photos
 
 let startPolys = 100;
@@ -12,7 +12,7 @@ let bestImage;
 
 let mutationRate = 0.4; //chance for chromosome to mutate
 let mutationAmount = 1; // how many datapoints mutate when a chromosome mutates
-let mutationStrength = 10; //standard deviation of the gaussian for mutation
+let mutationStrength = 100; //standard deviation of the gaussian for mutation
 
 
 function preload() {
@@ -63,7 +63,7 @@ function EvaluateAndMakeNewPop() {
     let selected = [];
     for (let i = 0; i < toSelect; i++) { selected.push(rouletteWheel()) };
     for (let i = selected.length; i < popSize; i++) {
-        selected.push(random(selected));
+        selected.push(random(_.cloneDeep(selected)));
         selected[i].mutate();
     }
 
@@ -87,7 +87,7 @@ function rouletteWheel() {
     for (let p in probs) {
         if (choice < probs[p]) {
             chosen = images[p];
-            return (chosen);
+            return (_.cloneDeep(chosen));
             break;
         } else {
             choice -= probs[p];
